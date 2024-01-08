@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - "**"
+    paths: "../../chatbox/**"
 
 jobs:
   build:
