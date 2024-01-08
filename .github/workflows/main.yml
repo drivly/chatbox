@@ -17,7 +17,11 @@ jobs:
           node-version: 16.x
           cache: "pnpm"
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run lint && pnpm run build
-      
-      
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: ./chatbox  # Update this path to your desired directory
+
+      - name: Lint and Build
+        run: |
+          pnpm run lint && pnpm run build
+        working-directory: ./chatbox  # Update this path to your desired directory
