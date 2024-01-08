@@ -9,19 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          path: ./chatbox
       - uses: pnpm/action-setup@v2
         with:
+          path: ./chatbox
           version: 7
       - uses: actions/setup-node@v3
         with:
+          path: ./chatbox
           node-version: 16.x
           cache: "pnpm"
 
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
-        working-directory: ./chatbox  # Update this path to your desired directory
+        run: |
+          cd ./chatbox  # Move to the chatbox directory
+          pnpm install --frozen-lockfile
 
       - name: Lint and Build
         run: |
+          cd ./chatbox  # Move to the chatbox directory
           pnpm run lint && pnpm run build
-        working-directory: ./chatbox  # Update this path to your desired directory
