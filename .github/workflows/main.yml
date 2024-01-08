@@ -1,6 +1,10 @@
 name: CI
 on:
   push:
+    paths:
+      - "chatbox/**"
+    paths-ignore:
+      - "example/**"
     branches:
       - "**"
 
@@ -9,19 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          working-directory: ./chatbox
       - uses: pnpm/action-setup@v2
         with:
           version: 7
-
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: "pnpm"
-          working-directory: ./chatbox
-   
+
       - run: pnpm install --frozen-lockfile
-        working-directory: ./chatbox
       - run: pnpm run lint && pnpm run build
-        working-directory: ./chatbox
