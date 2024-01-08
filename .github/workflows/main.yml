@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - "**"
-    paths: "../../chatbox/**"
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,6 +11,10 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - run: bun install
-      - run: bun run lint && bun run build
+      - name: Run action in sub directory
+        working-directory: ../../chatbox
+        run: |
+          bun install
+          bun run lint && bun run build
+      
       
