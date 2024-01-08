@@ -13,20 +13,12 @@ jobs:
           path: ./chatbox
       - uses: pnpm/action-setup@v2
         with:
-          path: ./chatbox
           version: 7
       - uses: actions/setup-node@v3
         with:
-          path: ./chatbox
           node-version: 16.x
           cache: "pnpm"
 
-      - name: Install Dependencies
-        run: |
-          cd ./chatbox  # Move to the chatbox directory
-          pnpm install --frozen-lockfile
-
-      - name: Lint and Build
-        run: |
-          cd ./chatbox  # Move to the chatbox directory
-          pnpm run lint && pnpm run build
+   
+      - run: cd ./chatbox pnpm install --frozen-lockfile
+      - run: cd ./chatbox pnpm run lint && pnpm run build
