@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.chatbox {
+  @apply text-base leading-[1.4] font-sans antialiased;
+}
+
+.chatbox-chat {
+  @apply flex flex-col overflow-y-scroll h-full p-4 gap-[5px];
+}
+
+/* message */
+.chatbox-chat-message {
+  @apply flex relative;
+}
+
+.chatbox-chat-message span {
+  @apply rounded-lg px-[15px] py-[10px];
+}
+
+.chatbox-chat-message.chatbox-chat-message-out {
+  @apply mr-12;
+}
+
+.chatbox-chat-message.chatbox-chat-message-out span {
+  @apply bg-[#eee];
+}
+
+.chatbox-chat-message.chatbox-chat-message-in {
+  @apply justify-end ml-12;
+}
+
+.chatbox-chat-message.chatbox-chat-message-in span {
+  @apply text-[var(--color-text)] bg-[var(--color-primary)];
+}
+
+/* form */
+.chatbox-form {
+  @apply relative border-t border-solid border-gray-200;
+}
+
+.chatbox-form-message {
+  @apply block h-[50px] w-full p-[0.9rem] outline-none resize-none focus:ring-gray-100 !important;
+}
+
+.chatbox-form-message::placeholder {
+  @apply text-gray-400;
+}
+
+.chatbox-form-submit {
+  @apply absolute cursor-pointer z-[2] right-4 top-2.5 flex items-center justify-center p-[5px] disabled:opacity-50;
+}
+
+/* widget */
+.chatbox-widget-root {
+  @apply fixed z-50 bottom-5 right-5 w-full h-0;
+}
+
+.chatbox-widget-trigger-button {
+  @apply shadow-chatbox cursor-pointer z-[1] absolute right-0 bottom-0 w-14 h-14 rounded-full bg-[var(--color-primary)] flex items-center justify-center;
+}
+
+.chatbox-widget-modal {
+  @apply rounded-lg grid grid-rows-[auto,1fr,auto] overflow-hidden z-[2] absolute bottom-[calc(100%+60px+20px)] right-0 h-[460px] w-[90%] sm:w-[320px] max-w-full bg-white shadow-[0_5px_40px_0_rgba(0,0,0,0.16)];
+}
+
+.chatbox-widget-header {
+  @apply bg-[var(--color-primary)] text-[var(--color-text)] p-4;
+}
+
+.chatbox-widget-header h2 {
+  @apply text-lg font-bold;
+}
+
+.chatbox-widget-header p {
+  @apply text-sm;
+}
+
+/* email form */
+.chatbox-widget-email-form {
+  @apply p-4 bg-[rgba(0,0,0,0.06)] rounded-lg mt-[5px];
+}
+
+.chatbox-widget-email-form input {
+  @apply bg-white p-2.5 w-full rounded-lg mt-2.5;
+}
+
+/* admin */
+.chatbox-admin-header {
+  @apply bg-[var(--color-primary)] text-[var(--color-text)] p-4 text-sm;
+}
+.chatbox-admin-header > p {
+  @apply font-medium leading-[22px] tracking-[0.02em];
+}
+.chatbox-admin-header-title {
+  @apply line-clamp-1 flex justify-between items-center;
+}
+
+.chatbox-admin-header-title > h1 {
+  @apply font-semibold;
+}
+
+.chatbox-admin-root {
+  @apply fixed w-full min-h-screen h-full bg-[#eee];
+}
+
+.chatbox-admin-grid {
+  @apply grid grid-rows-[auto,1fr,auto] h-full bg-white w-full  sm:max-w-2xl mx-auto;
+}
+
+
+/* admin messages */
+
+.chatbox-admin-chat {
+  @apply space-y-4 py-8 px-5 overflow-y-scroll
+}
+
+.chatbox-admin-chat-message {
+  @apply flex w-fit relative;
+}
+
+.chatbox-admin-chat-message-is-user {
+  @apply ml-auto
+}
+
+.chatbox-admin-image-wrapper {
+  @apply flex-shrink-0
+}
+
+.chatbox-admin-image-order {
+  @apply order-2
+}
+
+.chatbox-admin-image  {
+  @apply rounded-full mx-2
+}
+
+.chatbox-admin-user {
+  @apply text-xs px-0.5 pb-0.5 text-gray-700 text-left
+}
+
+.chatbox-admin-chat-is-user {
+  @apply text-right text-blue-500
+}
+
+.chatbox-admin-chat-message {
+  @apply flex items-end
+}
+
+.chatbox-admin-chat-message-content {
+  @apply px-3 py-2 rounded-lg w-fit  bg-[#eee] text-[var(--color-primary)]
+}
+
+.chatbox-admin-chat-message-content-is-user {
+  @apply bg-[var(--color-primary)] text-white order-2
+}
+
+.chatbox-admin-chat-timesatamp {
+  @apply text-xs italic px-2 text-gray-600
+}
+
+.chatbox-admin-chat-timesatamp-is-user {
+  @apply text-right
+}
