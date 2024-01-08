@@ -14,13 +14,14 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 7
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: "pnpm"
           working-directory: ./chatbox
    
-      - run: cd ./chatbox pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
         working-directory: ./chatbox
-      - run: cd ./chatbox pnpm run lint && pnpm run build
+      - run: pnpm run lint && pnpm run build
         working-directory: ./chatbox
