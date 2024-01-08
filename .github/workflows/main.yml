@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          path: ./chatbox
+          working-directory: ./chatbox
       - uses: pnpm/action-setup@v2
         with:
           version: 7
@@ -18,7 +18,9 @@ jobs:
         with:
           node-version: 16.x
           cache: "pnpm"
-
+          working-directory: ./chatbox
    
       - run: cd ./chatbox pnpm install --frozen-lockfile
+        working-directory: ./chatbox
       - run: cd ./chatbox pnpm run lint && pnpm run build
+        working-directory: ./chatbox
