@@ -12,7 +12,7 @@ jobs:
         with:
           bun-version: latest
       - name: Run action in sub directory
-        working-directory: chatbox/chatbox
+        working-directory: chatbox/chatbox  # Update the working directory path here
         run: |
           bun install
           bun run lint && bun run build
