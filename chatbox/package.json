@@ -50,5 +50,8 @@
   },
   "bugs": {
     "url": "https://github.com/drivly/chatbox.git/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
