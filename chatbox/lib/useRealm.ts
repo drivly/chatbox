@@ -38,12 +38,11 @@ const useRealm = (chatId: string) => {
       changeStream = collection?.watch()
 
       changeStream?.next().then((change) => {
-        const changeChatId = change.value.fullDocument?.chatId
+        const changeChatId = change.value?.fullDocument?.chatId 
         if (changeChatId === chatId) {
           const data = change.value.fullDocument.chatData
 
           if (chat && data.length === chat.length) return
-
 
           if (!chat) {
             mutate(fetcher(`/api/chatbox/chat/${chatId}`))
@@ -59,12 +58,8 @@ const useRealm = (chatId: string) => {
     login()
 
     return () => {
-      if (changeStream) {
-        changeStream.return
-      }
-      if (realmUser) {
-        realmUser.logOut()
-      }
+      changeStream?.return(null)
+      realmUser?.logOut()
     }
   }, [chatId, chat, mutate, user])
 
