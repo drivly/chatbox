@@ -11,7 +11,8 @@
     "dev": "next dev",
     "build": "tsup && cp package.json ./dist/",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "release": "release-it"
   },
   "dependencies": {
     "@types/react-timeago": "^4.1.7",
