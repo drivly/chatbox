@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter as FontSans, IBM_Plex_Sans, Montserrat } from 'next/font/google'
-import '@drivly/chatbox/style.css'
-import ChatBox from '@drivly/chatbox'
+import '@drivly/chatbox/app/chatbox.css'
+import ChatBox from '@drivly/chatbox/components/widget'
 
 const fontSans = FontSans({
   subsets: ['latin'],

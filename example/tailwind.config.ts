@@ -13,6 +13,9 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      boxShadow: {
+        chatbox: '0 2px 6px 0 rgb(6 6 17 / 0.12)',
+      },
     },
   },
   plugins: [],
