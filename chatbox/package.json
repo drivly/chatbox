@@ -2,7 +2,7 @@
   "name": "@drivly/chatbox",
   "description": "Drivly Chatbox built for Next JS 14 (app router) using MongoDB",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "main": "./chatbox.js",
   "module": "./chatbox.js",
