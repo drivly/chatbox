@@ -39,9 +39,7 @@ yarn add @drivly/chatbox
 
 import '@drivly/chatbox/style.css'
 import dynamic from 'next/dynamic'
-const ChatBox = dynamic(() => import('@drivly/chatbox'), {
-  ssr: false,
-})
+import ChatBox from '@drivly/chatbox'
 
 export default function RootLayout({
   children,
