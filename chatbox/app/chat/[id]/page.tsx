@@ -1,9 +1,11 @@
-import ChatBoxAdminRoot from '../../../components/admin'
-
+import dynamic from 'next/dynamic'
+const ChatBoxAdmin = dynamic(() => import('../../../components/admin'), {
+  ssr: false,
+})
 const AdminPage = ({ params }: { params: { id: string } }) => {
   return (
     <div>
-      <ChatBoxAdminRoot params={params} />
+      <ChatBoxAdmin params={params} />
     </div>
   )
 }

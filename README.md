@@ -2,9 +2,6 @@
 
 Create a ChatBox Widget (like Intercom live chat) for your Next.js app. Nothing to maintain, it is completely serverless. When your website's visitor starts a session, the chat link is sent to your Slack channel via a webhook. All chats are stored in a MongoDB database.  
 
-<!-- Check out the [the demo](https://upstash-chatbox.vercel.app). -->
-
-
 Here the steps:
 
 ### 1. Create MongoDB Database
@@ -41,14 +38,10 @@ yarn add @drivly/chatbox
 // app/layout.tsx
 
 import '@drivly/chatbox/style.css'
-import ChatBox from '@drivly/chatbox'
-
-const user = {
-  name: 'John Doe',
-  firstName: 'John',
-  image: 'https://i.pravatar.cc/300',
-  email: 'john@gmail.com'
-}
+import dynamic from 'next/dynamic'
+const ChatBox = dynamic(() => import('@drivly/chatbox'), {
+  ssr: false,
+})
 
 export default function RootLayout({
   children,
@@ -99,12 +92,15 @@ export type ChatUser = {
 ```js
 // app/chat/[id]/page.tsx
 
-import ChatBoxAdminRoot from '@drivly/chatbox/admin'
+import dynamic from 'next/dynamic'
+const ChatBoxAdmin = dynamic(() => import('@drivly/chatbox/admin'), {
+  ssr: false,
+})
 
 const AdminPage = async ({ params }: { params: { id: string } }) => {
   return (
     <div>
-      <ChatBoxAdminRoot params={params} />
+      <ChatBoxAdmin params={params} />
     </div>
   )
 }
@@ -132,7 +128,7 @@ import createChatApi from '@drivly/chatbox/api'
 const chatApi = createChatApi({
   db: process.env.MONGODB_DB,
   collection: process.env.MONGODB_COLLECTION,
-  webhooks: [process.env.SLACK_WEBHOOK_URL],
+  webhooks: [process.env.SLACK_WEBHOOK_URL!],
 })
 
 export { chatApi as GET, chatApi as POST }

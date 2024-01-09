@@ -1,9 +1,12 @@
-import ChatBoxAdminRoot from '@drivly/chatbox/admin'
+import dynamic from 'next/dynamic'
+const ChatBoxAdmin = dynamic(() => import('@drivly/chatbox/admin'), {
+  ssr: false,
+})
 
 const AdminPage = async ({ params }: { params: { id: string } }) => {
   return (
     <div>
-      <ChatBoxAdminRoot params={params} />
+      <ChatBoxAdmin params={params} />
     </div>
   )
 }

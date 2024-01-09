@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter as FontSans, IBM_Plex_Sans, Montserrat } from 'next/font/google'
-import '@drivly/chatbox/app/chatbox.css'
-import ChatBox from '@drivly/chatbox/components/widget'
-
+import '@drivly/chatbox/style.css'
+import dynamic from 'next/dynamic'
+const ChatBox = dynamic(() => import('@drivly/chatbox'), {
+  ssr: false,
+})
 const fontSans = FontSans({
   subsets: ['latin'],
   variable: '--font-sans',
@@ -38,7 +40,7 @@ export default function RootLayout({
         className={`w-full font-sans ${fontSans.variable} ${IBM.variable} ${mont.variable}`}>
         <main>
           {children}
-          <ChatBox userLocation='The Cloud' />
+          <ChatBox />
         </main>
       </body>
     </html>

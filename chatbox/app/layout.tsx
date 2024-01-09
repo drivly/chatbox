@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import { Inter as FontSans, IBM_Plex_Sans, Montserrat } from 'next/font/google'
-import './chatbox.css'
-import ChatBox from '../components/widget'
 import { cn } from '../lib/utils'
+import './chatbox.css'
+const ChatBox = dynamic(import('../components/widget'), {
+  ssr: false,
+})
 
 const fontSans = FontSans({
   subsets: ['latin'],

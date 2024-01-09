@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@drivly/chatbox": "^0.0.2",
+    "@drivly/chatbox": "^0.0.4",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18"
