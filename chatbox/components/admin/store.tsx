@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import useChats from '../../lib/useChats'
 import { ChatMessage, ChatUser } from '../widget/store'
-import useRealm from '../../lib/useRealm'
 
 interface IChatBoxContext {
   id: string
@@ -35,7 +34,7 @@ export function ChatBoxProvider({
   const [message, setMessage] = useState('')
 
   const { data: chat, error, mutate } = useChats(id)
-  useRealm(id)
+
   const onSendMessage = async () => {
     let content = 'o:' + message
 

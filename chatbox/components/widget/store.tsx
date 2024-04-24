@@ -1,7 +1,6 @@
 import { nanoid } from 'nanoid'
 import React, { createContext, useState } from 'react'
 import useChats from '../../lib/useChats'
-import useRealm from '../../lib/useRealm'
 
 export type ChatUser = {
   name: string
@@ -19,6 +18,7 @@ export type ChatMessage = {
   email: string
   location: string
   userId?: string
+  siteUrl?: string
 }
 
 let window: Window | undefined
@@ -92,6 +92,7 @@ export function ChatBoxProvider({
   description,
   showOnInitial,
   children,
+  siteUrl,
   user,
   userLocation,
   track,
@@ -105,20 +106,15 @@ export function ChatBoxProvider({
   children: any
   user?: ChatUser
   userLocation?: string
-  track?: (
-    _eventType: string,
-    _customAttributes: object,
-    _overrides?: object
-  ) => void
+  siteUrl?: string
+  track?: (_eventType: string, _customAttributes: object, _overrides?: object) => void
 }) {
   let initialID = 'visitor'
   const localID = getWithExpiry('chatbox_id')
   const [UID, setUID] = useState(localID ? localID : initialID)
   const [chatInitiated, setChatInitiated] = useState(localID ? true : false)
   const [isEmailSent, setIsEmailSent] = useState(getWithExpiry('emailSent'))
-  const [hasBeen5Minutes, setHasBeen5Minutes] = useState(
-    getWithExpiry('hasBeen5Minutes')
-  )
+  const [hasBeen5Minutes, setHasBeen5Minutes] = useState(getWithExpiry('hasBeen5Minutes'))
 
   const [isChatTrigger, setIsChatTrigger] = useState(performance.now())
   const [message, setMessage] = useState('')
@@ -127,7 +123,6 @@ export function ChatBoxProvider({
   const [isModalShow, setIsModalShow] = useState(showOnInitial)
 
   const { data: chat, error, mutate } = useChats(UID)
-  useRealm(UID)
 
   const onSendMessage = async () => {
     try {
@@ -155,7 +150,8 @@ export function ChatBoxProvider({
           eventCategory: 'Chat',
           data: {
             chatId: id,
-          }
+            siteUrl,
+          },
         })
         setChatInitiated(true)
         setUID(id)
@@ -182,7 +178,8 @@ export function ChatBoxProvider({
           eventCategory: 'Chat',
           data: {
             chatId: id,
-          }
+            siteUrl,
+          },
         })
 
         if (initResponse.status !== 200) {
@@ -197,7 +194,6 @@ export function ChatBoxProvider({
       setIsChatTrigger(performance.now())
       setMessage('')
 
-      console.log('user', user)
       const chatMessage: ChatMessage = {
         content,
         createdAt: Date.now(),
@@ -206,6 +202,7 @@ export function ChatBoxProvider({
         name: user?.name ?? user?.firstName ?? user?.email ?? 'Visitor',
         picture: user?.image ?? '',
         userId: user?.userId ?? 'anonymous',
+        siteUrl: siteUrl ?? '',
       }
 
       const uploadMessage = async () => {
@@ -227,7 +224,7 @@ export function ChatBoxProvider({
           data: {
             chatId: id,
             message: chatMessage.content,
-          }
+          },
         })
 
         const replyData = (await replyResponse.json()).chatData as ChatMessage
@@ -261,7 +258,7 @@ export function ChatBoxProvider({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, siteUrl }),
       })
 
       if (response.status !== 200) {
@@ -274,7 +271,8 @@ export function ChatBoxProvider({
         data: {
           chatId: id,
           email,
-        }
+          siteUrl,
+        },
       })
 
       setWithExpiry('emailSent', 'true')

@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter as FontSans, IBM_Plex_Sans, Montserrat } from 'next/font/google'
+import './globals.css'
 import '@drivly/chatbox/style.css'
-import dynamic from 'next/dynamic'
-const ChatBox = dynamic(() => import('@drivly/chatbox'), {
-  ssr: false,
-})
+import ChatBox from '@drivly/chatbox'
+
 const fontSans = FontSans({
   subsets: ['latin'],
   variable: '--font-sans',
@@ -29,18 +28,13 @@ export const metadata: Metadata = {
   description: 'Powered by Drivly',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body
-        className={`w-full font-sans ${fontSans.variable} ${IBM.variable} ${mont.variable}`}>
+      <body className={`w-full font-sans ${fontSans.variable} ${IBM.variable} ${mont.variable}`}>
         <main>
           {children}
-          <ChatBox />
+          <ChatBox title='Drivly support' description='How can we help?' />
         </main>
       </body>
     </html>

@@ -21,6 +21,7 @@ function ChatBoxAdmin({
   const displayName = lead?.name !== 'Visitor' ? lead?.name : `chat id ${id}`
   const displayEmail = lead?.email
   const displayLocation = lead?.location
+  const siteUrl = lead?.siteUrl
 
   return (
     <div
@@ -37,7 +38,10 @@ function ChatBoxAdmin({
               <h1>Hi, {displayName}</h1>
               <a href={`mailto:${displayEmail}`}>{displayEmail}</a>
             </div>
-            <p>{displayLocation}</p>
+            <div className='chatbox-admin-header-title'>
+              {displayLocation && <p>{displayLocation}</p>}
+              {siteUrl && <a href={siteUrl}>{siteUrl}</a>}
+            </div>
           </header>
           <AdminChat chat={chat} isChatTrigger={isChatTrigger} />
           <Form

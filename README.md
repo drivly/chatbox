@@ -1,6 +1,6 @@
 # ChatBox Widget for Next.js 14 Apps (App Router)
 
-Create a ChatBox Widget (like Intercom live chat) for your Next.js app. Nothing to maintain, it is completely serverless. When your website's visitor starts a session, the chat link is sent to your Slack channel via a webhook. All chats are stored in a MongoDB database.  
+Create a ChatBox Widget (like Intercom live chat) for your Next.js app. Nothing to maintain, it is completely serverless. When your website's visitor starts a session, the chat link is sent to your Slack channel via a webhook. All chats are stored in a MongoDB database.
 
 Here the steps:
 
@@ -21,9 +21,6 @@ cp .env.local.example .env.local
 - `MONGODB_URL` can be found when you Connect to Cluster in MongoDB Atlas.
 - `MONGODB_DB` is the name of the database you created in MongoDB Atlas.
 - `MONGODB_COLLECTION` is the name of the collection you created in MongoDB Atlas.
-- `NEXT_PUBLIC_REALM_APP_ID` is the App ID of your MongoDB App created in App Services.
-- `NEXT_PUBLIC_MONGODB_DB` is the name of the database you created in MongoDB Atlas.
-- `NEXT_PUBLIC_MONGODB_COLLECTION` is the name of the collection you created in MongoDB Atlas.
 - `SLACK_WEBHOOK_URL` can be found at the Slack integration page in https://api.slack.com/messaging/webhooks
 
 ### 2. Install Package
@@ -41,15 +38,10 @@ import '@drivly/chatbox/style.css'
 import dynamic from 'next/dynamic'
 import ChatBox from '@drivly/chatbox'
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body
-        className={`w-full font-sans ${fontSans.variable} ${IBM.variable} ${mont.variable}`}>
+      <body>
         <main>
           {children}
           <ChatBox />
@@ -62,16 +54,19 @@ export default function RootLayout({
 
 The options can be passed as React props
 
-| key              | type                 | default                                  |
-| ---------------- | -------------------- | ---------------------------------------- |
-| `themeColor?`    | `string`             | #2d00c6                                  |
-| `textColor?`     | `string`             | #fff                                     |
-| `title?`         | `string`             | Hi 👋                                    |
-| `description?`   | `string`             | Ask us anything, or share your feedback. |
-| `showOnInitial?` | `boolean`            | false                                    |
-| `customIcon?`    | `React.ReactElement` |                                          |
-| `userLocation?`  | `string`             | Miami, Fl                                |
-| `user?`          | `ChatUser`           | authenticated chat user                  |
+| key              | type                                                                           | default                                  |
+| ---------------- | ------------------------------------------------------------------------------ | ---------------------------------------- |
+| `autoMessage?`   | `string`                                                                       |                                          |
+| `customIcon?`    | `React.ReactElement`                                                           |                                          |
+| `description?`   | `string`                                                                       | Ask us anything, or share your feedback. |
+| `showOnInitial?` | `boolean`                                                                      | false                                    |
+| `siteUrl?`       | `string`                                                                       | https://browse.driv.ly                   |
+| `themeColor?`    | `string`                                                                       | #2d00c6                                  |
+| `textColor?`     | `string`                                                                       | #fff                                     |
+| `title?`         | `string`                                                                       | Hi 👋                                    |
+| `track?`         | `(_eventType: string, _customAttributes: object, _overrides?: object) => void` |                                          |
+| `user?`          | `ChatUser`                                                                     | authenticated chat user                  |
+| `userLocation?`  | `string`                                                                       | Miami, Fl                                |
 
 ```js
 
@@ -108,13 +103,13 @@ export default AdminPage
 
 The options can be passed as React props
 
-| key              | type                 | default                                  |
-| ---------------- | -------------------- | ---------------------------------------- |
-| `themeColor?`    | `string`             | #2d00c6                                  |
-| `textColor?`     | `string`             | #fff                                     |
-| `className?`     | `string`             |                                          |
-| `params`         | `object`             | id: Chat ID.                             |
-| `user?`          | `ChatUser`           | authenticated admin user                 |
+| key           | type       | default                  |
+| ------------- | ---------- | ------------------------ |
+| `className?`  | `string`   |                          |
+| `params`      | `object`   | id: Chat ID.             |
+| `themeColor?` | `string`   | #2d00c6                  |
+| `textColor?`  | `string`   | #fff                     |
+| `user?`       | `ChatUser` | authenticated admin user |
 
 ### 5. Create API
 

@@ -7,20 +7,21 @@ import { ChatBoxProvider, ChatUser } from './store'
 import { usePathname } from 'next/navigation'
 
 export interface IChatBoxWidget {
-  themeColor?: string
-  textColor?: string
   autoMessage?: string
-  title?: string
+  customIcon?: React.ReactElement
   description?: string
   showOnInitial?: boolean
-  customIcon?: React.ReactElement
-  user?: ChatUser
-  userLocation?: string
+  siteUrl?: string
+  themeColor?: string
+  textColor?: string
+  title?: string
   track?: (
     _eventType: string,
     _customAttributes: object,
     _overrides?: object
   ) => void
+  user?: ChatUser
+  userLocation?: string
 }
 
 export default function ChatBox({
@@ -31,6 +32,7 @@ export default function ChatBox({
   description,
   showOnInitial = false,
   customIcon,
+  siteUrl,
   user,
   userLocation,
   track,
@@ -47,6 +49,7 @@ export default function ChatBox({
       title={title}
       description={description}
       showOnInitial={showOnInitial}
+      siteUrl={siteUrl}
       track={track}
       user={user}
       userLocation={userLocation}>

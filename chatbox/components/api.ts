@@ -55,11 +55,14 @@ const createChatApi = (options: ChatApiOptions) => {
         case 'slack-email':
           if (method !== 'POST') throw new Error('Method not allowed')
 
-          const { email } = await req.json()
+          const { email, siteUrl } = await req.json()
 
           if (!email) throw new Error('Missing email')
 
-          const notifyEmailText = `A user left their email address ${email} with chat id: ${host}/chat/${chatId}`
+          const notifyEmailText = `A user${
+            siteUrl ? ` viewing ${siteUrl}` : ''
+          } left their email address ${email} with chat id: ${host}/chat/${chatId}`
+
           const requestsEmail = options.webhooks.map((webhook) =>
             fetch(webhook, {
               method: 'POST',
